@@ -17,6 +17,7 @@ class CutomTableViewCell: UITableViewCell {
         updateLabel()
     }
     
+    
     func updateLabel(){
         let atributeString = NSMutableAttributedString(string: label.text!)
     }

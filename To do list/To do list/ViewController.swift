@@ -46,5 +46,31 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        tableView.beginUpdates()
+        tasks.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
+    }
+}
+
+extension ViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Complete") { action, view, complete in
+            let task = self.tasks[indexPath.row].completeToggled()
+            self.tasks[indexPath.row] = task;
+            
+            complete(true)
+            
+            print("Complete")
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
 }
