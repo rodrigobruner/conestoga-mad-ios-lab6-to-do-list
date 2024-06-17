@@ -21,10 +21,39 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     }
+    
+    
+    @IBAction func addButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Add a new task", message: "Please fill in the field below with the task.", preferredStyle: .alert)
+        
+        alert.addTextField { field in
+            field.placeholder = "Task"
+            field.returnKeyType = .next
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
+            guard let fields = alert.textFields, fields.count ==  1 else {
+                return
+            }
+            let taskField = fields[0]
+            
+            guard let task = taskField.text, !task.isEmpty else {
+                return
+            }
+
+            self.tasks.append(Task(title:task))
+           
+        }))
+        
+        present(alert, animated: true)
+    }
+    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -46,13 +75,7 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        tableView.beginUpdates()
-        tasks.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        tableView.endUpdates()
-    }
+
 }
 
 extension ViewController: UITableViewDelegate{
@@ -73,4 +96,15 @@ extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            tableView.beginUpdates()
+//            tasks.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            tableView.endUpdates()
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
 }
