@@ -48,6 +48,8 @@ class ViewController: UIViewController {
             }
 
             self.tasks.append(Task(title:task))
+            self.tableView.reloadData()
+            
            
         }))
         
@@ -83,6 +85,9 @@ extension ViewController: UITableViewDelegate{
         let action = UIContextualAction(style: .normal, title: "Complete") { action, view, complete in
             let task = self.tasks[indexPath.row].completeToggled()
             self.tasks[indexPath.row] = task;
+            
+            self.tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             
             complete(true)
             
