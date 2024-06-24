@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Task {
+struct Task : Codable{
     let title: String
     let isComplete: Bool
     
@@ -19,4 +19,20 @@ struct Task {
     func completeToggled() -> Task {
         return Task(title: title, isComplete: !isComplete)
     }
+}
+
+
+let KeyForUserDefaults = "taskList"
+
+func saveTasks(_ tasks: [Task]) {
+    let data = tasks.map { try? JSONEncoder().encode($0) }
+    UserDefaults.standard.set(data, forKey: KeyForUserDefaults)
+}
+
+func loadTasks() -> [Task] {
+    guard let encodedData = UserDefaults.standard.array(forKey: KeyForUserDefaults) as? [Data] else {
+        return []
+    }
+
+    return encodedData.map { try! JSONDecoder().decode(Task.self, from: $0) }
 }

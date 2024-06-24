@@ -22,11 +22,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        let start: [Task] = loadTasks()
+        if(start.count > 0){
+            self.tasks = start
+        }
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    }
-    
     
     @IBAction func addButton(_ sender: Any) {
         let alert = UIAlertController(title: "Add a new task", message: "Please fill in the field below with the task.", preferredStyle: .alert)
@@ -48,6 +48,9 @@ class ViewController: UIViewController {
             }
 
             self.tasks.append(Task(title:task))
+            
+            saveTasks(self.tasks)
+            
             self.tableView.reloadData()
             
            
@@ -55,10 +58,9 @@ class ViewController: UIViewController {
         
         present(alert, animated: true)
     }
-    
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,10 +79,6 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-
-}
-
-extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Complete") { action, view, complete in
             let task = self.tasks[indexPath.row].completeToggled()
@@ -102,14 +100,15 @@ extension ViewController: UITableViewDelegate{
         return .delete
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            tableView.beginUpdates()
-//            tasks.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            tableView.endUpdates()
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            tasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            saveTasks(tasks)
+            tableView.endUpdates()
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
 }

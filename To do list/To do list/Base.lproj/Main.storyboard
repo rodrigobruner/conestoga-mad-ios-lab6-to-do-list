@@ -22,11 +22,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4br-hu-VFL">
-                                <rect key="frame" x="30" y="59" width="51" height="34.333333333333343"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="square.and.pencil" catalog="system"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yD-C3-Ztg">
                                 <rect key="frame" x="316" y="59" width="47" height="34.333333333333343"/>
                                 <state key="normal" title="Button"/>
@@ -77,12 +72,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wEg-N1-086" secondAttribute="trailing" constant="30" id="3D6-UV-SVK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CN0-EL-yVB" secondAttribute="bottom" id="Xx7-aK-fiL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CN0-EL-yVB" secondAttribute="trailing" id="ZdH-Kl-Kks"/>
-                            <constraint firstItem="4br-hu-VFL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="abf-T7-TLl"/>
                             <constraint firstItem="CN0-EL-yVB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cI1-fc-RCp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4yD-C3-Ztg" secondAttribute="trailing" constant="30" id="dGw-ns-QDs"/>
                             <constraint firstItem="wEg-N1-086" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="kaE-Jl-hb6"/>
                             <constraint firstItem="wEg-N1-086" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="mpI-yU-jcS"/>
-                            <constraint firstItem="4br-hu-VFL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="twu-JV-vG3"/>
                             <constraint firstItem="4yD-C3-Ztg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yIK-pE-Kj5"/>
                         </constraints>
                     </view>
@@ -92,12 +85,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21" y="5"/>
+            <point key="canvasLocation" x="20.610687022900763" y="4.9295774647887329"/>
         </scene>
     </scenes>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
